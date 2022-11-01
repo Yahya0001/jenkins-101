@@ -31,15 +31,18 @@ pipeline {
             steps {
                 echo 'Dockerization....'
                 sh '''
-                echo "doing Dockerization stuff.."
+                cd ..
+                docker build -t yahyaallaya/my-python-script:latest .
                 '''
             }
         }
-        stage('Deliver') {
+        stage('Push docker image') {
             steps {
                 echo 'Deliver....'
                 sh '''
-                echo "doing delivery stuff.."
+                docker tag yahyaallaya/my-python-script:latest  allayayahya/python-test:0.1.1
+                docker login -u allayayahya -p 92492@All
+                docker push allayayahya/python-test:0.1.1
                 '''
             }
         }
