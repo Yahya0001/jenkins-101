@@ -5,7 +5,7 @@ pipeline {
             }
       }
     triggers {
-        pollSCM '* * * * *'
+        pollSCM '*/5 * * * *'
     }
     stages {
         stage('Build') {
@@ -24,6 +24,14 @@ pipeline {
                 cd myapp
                 python3 hello.py
                 python3 hello.py --name=Brad
+                '''
+            }
+        }
+        stage('Dockerization') {
+            steps {
+                echo 'Dockerization....'
+                sh '''
+                echo "doing Dockerization stuff.."
                 '''
             }
         }
